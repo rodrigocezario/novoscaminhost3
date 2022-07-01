@@ -40,7 +40,7 @@ $dataNascimentoMes = 6;
 $dataNascimentoAno = 2022;
 
 //boolean (lógico sim ou não)
-$estamosEmAula = false; //false
+$estamosEmAula = false; //false / true
 
 //tipagem dinamica
 $estamosEmAula = 10;
@@ -59,6 +59,10 @@ $conexaoBancoDados = mysql_connection('', '', '');
 
 //Null (nulo)
 $nada = null;
+
+//String
+//Cast
+$nada = (string) "Uma outra coisa";
 
 
 
