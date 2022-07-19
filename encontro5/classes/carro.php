@@ -1,5 +1,14 @@
 <?php
 
+//Pilares da OO
+//Abstração (Classes: estrutura; Objetos: instância)
+//encapsulamento (getters e setters)
+//composição
+
+//Herança
+//Polimorfismo
+
+
 //classe que irá representar (estrutura) um carro
 class Carro {
 
@@ -9,7 +18,7 @@ class Carro {
     public $marca;
     public $modelo;
     private $motor; //1.0 ou 2.0 1.4., 1.6
-    private $velocidade;
+    private $velocidade; //heap
 
     //construtor da classe (método mágico)
     function __construct($motor) { //stdClass (objeto) herdou
