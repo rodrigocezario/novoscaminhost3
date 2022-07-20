@@ -1,3 +1,21 @@
+<?php 
+
+require "dao/conexao.php";
+
+//teste com a conexão com banco de dados
+
+try {
+    
+    $conexao = Conexao::getConnection();
+    echo "Conexão com banco de dados realizada com sucesso!";
+
+} catch (\Throwable $th) {
+    //throw $th;
+    echo "Erro ao conectar com BD: ". $th->getMessage() ;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
