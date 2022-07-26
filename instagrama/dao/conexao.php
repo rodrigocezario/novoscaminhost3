@@ -16,7 +16,7 @@ class Conexao {
     //getInstance (quando singleton)
     public static function getConnection() {
         if(!isset(self::$conexao)){
-            self::$conexao = new PDO('mysql:host=uol.com.br;dbname=fotoweb', 'root', '');
+            self::$conexao = new PDO('mysql:host=localhost;dbname=fotoweb', 'root', '');
         }
         return self::$conexao;
     }

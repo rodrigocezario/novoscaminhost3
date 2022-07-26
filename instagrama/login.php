@@ -1,6 +1,8 @@
 <?php 
 
-require "dao/conexao.php";
+require_once "configuracoes.php";
+
+//require "dao/conexao.php";
 
 //teste com a conexão com banco de dados
 
