@@ -29,5 +29,31 @@ class PessoaDao extends AbstractDao {
         $st->bindValue(1, $id, PDO::PARAM_INT);
         $st->execute();
     }
+
+    public function logar($dto) {
+        $sql = "select * from Pessoa where PessoaEmail = ? and PessoaSenha = ?";
+        $st = $this->conexao->prepare($sql);
+        $st->bindValue(1, $dto->getLogin(), PDO::PARAM_STR);
+        $st->bindValue(2, $dto->getSenha(), PDO::PARAM_STR);
+
+        $st->setFetchMode(PDO::FETCH_ASSOC);
+        $st->execute();
+        $rs = $st->fetch();
+
+        if(empty($rs)){
+            throw new Exception("Usuário não encontrado!");
+        }
+
+        $pessoa = new Pessoa();
+        $pessoa->setId($rs["PessoaID"]);        
+        $pessoa->setNome($rs["PessoaNome"]);        
+        $pessoa->setNick($rs["PessoaNick"]);        
+        $pessoa->setEmail($rs["PessoaEmail"]);        
+        $pessoa->setFoto($rs["PessoaFoto"]);        
+        $pessoa->setDataCadastro($rs["PessoaDataCad"]);        
+
+        return $pessoa;
+    }
+
     
 }

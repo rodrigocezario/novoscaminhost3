@@ -1,17 +1,21 @@
 <?php 
 
+require_once "configuracoes.php";
+
 function verificaLogado(){
     //se não estiver logado, que seja redirecionado para tela de login
     if(!isset($_SESSION["USUARIO"])){
        //redirecionar
        header("Location: login.php"); 
-    }     
+    }  
+    $pessoa = unserialize($_SESSION["USUARIO"]);
+    return $pessoa;
 } 
 
 session_start();
 //remover
 //$_SESSION["USUARIO"] = "Rodrigo";
-verificaLogado(); //chamada da função
+$pessoa = verificaLogado(); //chamada da função
 
 //isset($_SESSION["USUARIO"])
 
@@ -39,7 +43,7 @@ if(isset($_GET["acao"])) {
 </head>
 <body>
     <h1>Seja bem-vindo!</h1>
-    <h2><?php echo $_SESSION["USUARIO"]; ?></h2>
+    <h2><?php echo $pessoa->getNome(); ?></h2>
     <div>
         <p>
             <a href="index.php?acao=sair">Sair</a>
