@@ -33,3 +33,14 @@ function gerarFotoNome($tamanho) {
     }
     return $random_str;
 }
+
+
+function verificaLogado(){
+    //se não estiver logado, que seja redirecionado para tela de login
+    if(!isset($_SESSION["USUARIO"])){
+       //redirecionar
+       header("Location: login.php"); 
+    }  
+    $pessoa = unserialize($_SESSION["USUARIO"]);
+    return $pessoa;
+} 
