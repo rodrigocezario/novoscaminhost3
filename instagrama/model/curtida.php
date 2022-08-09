@@ -4,9 +4,11 @@ class Curtida {
 
     private $id;
     private $pessoa;
+    private $publicacao;
 
-    public function __construct($pessoa) {
+    public function __construct($pessoa, $publicacao) {
         $this->pessoa = $pessoa;
+        $this->publicacao = $publicacao;
     }
 
     public function getId()
@@ -25,4 +27,8 @@ class Curtida {
         return $this->pessoa;
     }
 
+    public function getPublicacao()
+    {
+        return $this->publicacao;
+    }
 }

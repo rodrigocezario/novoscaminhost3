@@ -23,8 +23,29 @@ class PublicacaoDao extends AbstractDao {
 
     }
 
-    public function listar() {
-        
+    public function listar($pessoa) {
+
+        $sql = "select u.PessoaID, u.PessoaNick, p.PubID, p.PubData, p.PubArquivo, p.PubTexto from Publicacao p inner join Pessoa u on (u.PessoaID = p.PessoaID) where p.PessoaID in (select AmigoID from PessoaAmigos where PessoaID = ? union select ?) order by p.PubData desc";
+        $st = $this->conexao->prepare($sql);
+        $st->bindValue(1, $pessoa->getId(), PDO::PARAM_INT);
+        $st->bindValue(2, $pessoa->getId(), PDO::PARAM_INT);
+        $st->execute();
+
+        $lista = [];
+        while($reg = $st->fetch(PDO::FETCH_ASSOC)){
+
+            $publicacao = new Publicacao($pessoa);
+            $publicacao->setId($reg["PubID"]);
+            $publicacao->setFoto($reg["PubArquivo"]);
+            $publicacao->setData($reg["PubData"]);
+            $publicacao->setTexto($reg["PubTexto"]);
+
+            //adicionar as curtidas
+
+            $lista[] = $publicacao;
+        }
+
+        return $lista;
     }
 
 
