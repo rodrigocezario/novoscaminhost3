@@ -41,6 +41,9 @@ class PublicacaoDao extends AbstractDao {
             $publicacao->setTexto($reg["PubTexto"]);
 
             //adicionar as curtidas
+            $curtidaDao = new CurtidaDao;
+            $curtidas = $curtidaDao->getCurtidas($reg["PubID"]);
+            $publicacao->setCurtidas($curtidas);
 
             $lista[] = $publicacao;
         }
@@ -48,6 +51,35 @@ class PublicacaoDao extends AbstractDao {
         return $lista;
     }
 
+
+    public function getPublicacao($id) {
+        $sql = "select * from Publicacao where PubID = ?";
+        $st = $this->conexao->prepare($sql);
+        $st->bindValue(1, $id, PDO::PARAM_INT);
+
+        $st->setFetchMode(PDO::FETCH_ASSOC);
+        $st->execute();
+        $rs = $st->fetch();
+        
+        if (empty($rs)) {
+            throw new Exception("Publicação não encontrada!");
+        }
+
+        $pessoaDao = new PessoaDao;
+        $autor = $pessoaDao->getAutor($rs["PessoaID"]);
+
+        $curtidaDao = new CurtidaDao;
+        $curtidas = $curtidaDao->getCurtidas($rs["PubID"]);
+
+        $publicacao = new Publicacao($autor);
+        $publicacao->setID($rs["PubID"]);
+        $publicacao->setTexto($rs["PubTexto"]);
+        $publicacao->setFoto($rs["PubArquivo"]);
+        $publicacao->setData($rs["PubData"]);
+        $publicacao->setCurtidas($curtidas);
+
+        return $publicacao;
+    }
 
 
 }

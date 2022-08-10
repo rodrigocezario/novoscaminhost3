@@ -52,7 +52,6 @@ class CurtidaDao extends AbstractDao {
 
         $curtida = new Curtida($rs["PessoaID"], $rs["PubID"]);
         $curtida->setId($rs["CurtID"]);
-        $lista[] = $curtida;
         return $curtida;
     }
 

@@ -76,4 +76,9 @@ class Publicacao {
         return sizeof($this->curtidas);
     }
 
+    public function setCurtidas($curtidas)
+    {
+        $this->curtidas = $curtidas;
+        return $this;
+    }
 }
